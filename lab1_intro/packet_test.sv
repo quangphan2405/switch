@@ -9,10 +9,21 @@ Copyright Cadence Design Systems (c)2019
 -----------------------------------------------------------------*/
 
 module packet_test;
+   // Import package
+   import packet_pkg::*;
 
+   // Create class handle
+   packet p1;
 
-
-
+   // Test block
+   initial begin : TEST
+      p1 = new("My package", 2);
+      p1.data = 8'h4a;
+      p1.target = 4'hc;
+      p1.print(BIN);
+      p1.print(DEC);
+      p1.print();
+   end
 
 //--------------------validate functions for verification --------------------
 //--------------------Do not edit below this line          --------------------
