@@ -15,14 +15,16 @@ module packet_test;
    // Create class handle
    packet p1;
 
+   // Randomize return value
+   int ok;
+
    // Test block
    initial begin : TEST
       p1 = new("My package", 2);
-      p1.data = 8'h4a;
-      p1.target = 4'hc;
-      p1.print(BIN);
-      p1.print(DEC);
-      p1.print();
+      repeat (10) begin	 
+	 ok = p1.randomize() with { target == 4'b1111; };
+	 p1.print(BIN);
+      end
    end
 
 //--------------------validate functions for verification --------------------

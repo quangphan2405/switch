@@ -23,14 +23,18 @@ class packet;
 
    // add properties here
    local string name;
-   bit [3:0] 	target, source;
-   bit [7:0] 	data;
-   ptype_t ptype;   
+   bit [3:0] 	source;
+   rand bit [3:0] target;
+   rand bit [7:0] data;
+   ptype_t ptype;
+
+   constraint target_nz { target != 0; }
+   constraint not_same_bit { (target & source) == 4'b0; }
 
    // add constructor to set instance name and source by arguments and packet type
    function new(input string name_i,
 		input int    source_i);
-      name   = name_i;
+      this.name   = name_i;
       source = 4'b1 << source_i;
       ptype  = ANY;
    endfunction : new
