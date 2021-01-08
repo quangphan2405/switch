@@ -28,8 +28,8 @@ class packet;
    ptype_t ptype;   
 
    // add constructor to set instance name and source by arguments and packet type
-   function void new(input string  name_i,
-		     input int source_i);
+   function new(input string name_i,
+		input int    source_i);
       name   = name_i;
       source = 4'b1 << source_i;
       ptype  = ANY;
@@ -45,7 +45,7 @@ class packet;
 
    // add print with policy
    function void print(input format_t format = HEX);
-      $display("Current packet properties:");
+      $display("Current packet properties with format: %s", format.name());
       $display("Name: %s, packet type: %s", getname(), gettype());
       case ( format )
 	DEC    : $display("Source: %d, target: %d, data: %d", source, target, data);
