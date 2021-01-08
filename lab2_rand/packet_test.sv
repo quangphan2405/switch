@@ -21,10 +21,14 @@ module packet_test;
    // Test block
    initial begin : TEST
       p1 = new("My package", 2);
-      repeat (10) begin	 
-	 ok = p1.randomize() with { target == 4'b1111; };
+      repeat (30) begin	 
+	 ok = p1.randomize() with { ptype != ANY; };	 
 	 p1.print(BIN);
       end
+
+      $display("\nTarget is violating constraint");
+      ok = p1.randomize() with { target == 4'b1111; };	 
+      p1.print(BIN);
    end
 
 //--------------------validate functions for verification --------------------

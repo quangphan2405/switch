@@ -26,10 +26,13 @@ class packet;
    bit [3:0] 	source;
    rand bit [3:0] target;
    rand bit [7:0] data;
-   ptype_t ptype;
+   rand ptype_t ptype;
 
    constraint target_nz { target != 0; }
    constraint not_same_bit { (target & source) == 4'b0; }
+   constraint packet_type { ptype == SINGLE    -> target inside { 1,2,4,8 };
+                            ptype == MULTICAST -> target inside { 3,[5:7],[9:14] };
+                            ptype == BROADCAST -> target == 15; }
 
    // add constructor to set instance name and source by arguments and packet type
    function new(input string name_i,
