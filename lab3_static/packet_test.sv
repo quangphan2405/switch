@@ -13,7 +13,7 @@ module packet_test;
    import packet_pkg::*;
 
    // Create class handle
-   packet p1, p2;
+   packet p1;
 
    // Randomize return value
    int ok;
@@ -31,16 +31,14 @@ module packet_test;
       ok = p1.randomize() with { target == 4'b1111; };	 
       p1.print(BIN);
  -----/\----- EXCLUDED -----/\----- */
-      $display("Pktcount: %d", packet::getcount());
+      $display("\nPktcount: %0d", packet::getcount());
       p1 = new("UNIDED package", 2, UNIDED);
-      p2 = new("IDED package", 2, IDED);
-      repeat(10) begin
-	 ok = p1.randomize() with { ptype != ANY; };
-         p1.print(HEX);
-
-         ok = p2.randomize() with { ptype != ANY; };
-         p2.print(HEX);
-      end  
+      ok = p1.randomize() with { ptype != ANY; };
+      p1.print(DEC);
+      p1 = new("IDED package", 2, IDED);
+      ok = p1.randomize() with { ptype != ANY; };
+      p1.print(DEC);
+      $display("\nPktcount: %0d", packet::getcount());
    end
 
 //--------------------validate functions for verification --------------------

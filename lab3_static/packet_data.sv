@@ -68,7 +68,7 @@ class packet;
    function void print(input format_t format = HEX);
       $display("Current packet properties with format: %s", format.name());
       $display("Name: %s, packet type: %s", getname(), gettype());
-      $display("Pktcount: %0d, tag: %0d, tagmode: %s", getcount(), tag, tagmode.name());
+      $display("Pktcount: %0d, tag: %0d, tagmode: %s", pktcount, tag, tagmode.name());
       case ( format )
 	DEC    : $display("Source: %d, target: %d, data: %d\n", source, target, data);
 	BIN    : $display("Source: %b, target: %b, data: %b\n", source, target, data);
